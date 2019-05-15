@@ -55,14 +55,14 @@ public class RoleService implements RoleServiceInter{
 	}	
 	
 	
-	
+
 	@Override
-	public List<UserRole> queryAllroles(Integer page, Integer pageSize) {
+	public List<UserRole> queryAllroles(Integer page, Integer pageSize,String name) {
 		if(page==null || pageSize==null) {
 			page=0;
 			pageSize=0;
 		}
-		return userRoleMapper.queryAllroles((page-1)*pageSize,page*pageSize);
+		return userRoleMapper.queryAllroles((page-1)*pageSize,page*pageSize,name);
 	}
 
 
@@ -113,9 +113,12 @@ public class RoleService implements RoleServiceInter{
 			}
 			if( !orgsByid.isEmpty() ) {
 				for(int i=0;i<orgsByid.size();i++) {
-					if(org.getName().equals(orgsByid.get(i).getName())) {
-						map.put("checked", true);
-					};						
+					if( orgsByid.get(i) != null && org != null ) {
+						if(org.getName().equals(orgsByid.get(i).getName())) {
+							map.put("checked", true);
+						};	
+					}
+										
 				}
 			}
 			

@@ -32,16 +32,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import cn.soa.entity.AuthInfo;
 import cn.soa.entity.UserInfo;
 import cn.soa.entity.UserOrganization;
-import cn.soa.entity.UserRole;
-import cn.soa.entity.UserTest;
 import cn.soa.entity.headResult.ResultJson;
 import cn.soa.entity.headResult.UserTableJson;
 import cn.soa.service.inter.RoleServiceInter;
 import cn.soa.service.inter.UserServiceInter;
-import cn.soa.util.GlobalUtil;
 
 
 /**
@@ -123,25 +119,6 @@ public class UserController {
 	}
 	
 	
-	 /**   
-	  * @Title: getUserAllListTest   
-	  * @Description:  查询所有用户(测试)             
-	  * @return: UserTableJson<List<UserOrganization>>        
-	  */  
-	@PostMapping("/list/test")
-	public UserTableJson<List<UserTest>> getUserAllListTest() {
-		logger.debug("--C----------开始获取所有用户-----------");
-		UserTest userTest = new UserTest("王者", 0 , -1);
-		UserTest userTest1 = new UserTest("射手", 1 ,0);
-		UserTest userTest2 = new UserTest("辅助", 2 ,0);
-		UserTest userTest3 = new UserTest("后裔", 11 ,1); 
-		ArrayList<UserTest> arrayList = new ArrayList<UserTest>();
-		arrayList.add(userTest);
-		arrayList.add(userTest1);
-		arrayList.add(userTest2);
-		arrayList.add(userTest3);
-		return new UserTableJson<List<UserTest>>( "", 1, "成功", arrayList, arrayList.size(),true );
-	}
 	
 	
 	 /**   
@@ -271,8 +248,9 @@ public class UserController {
 	public ResultJson<String> modifyUserState(@PathVariable("usernum") @NotNull int usernum){
 		logger.debug("-----C------- 修改用户状态   ---- usernum： " + usernum);
 		return null;
-	}	
+	}
 	
+
 	/**   
 	 * @Title: getUserByNum   
 	 * @Description:  根据用户usernum查询用户
@@ -299,9 +277,15 @@ public class UserController {
 	@PostMapping("/users")
 	public ResultJson<UserOrganization> saveUserBackIdContr(
 			@RequestParam("usernum") String usernum, 
-			@RequestParam("name") String name  ){
+			@RequestParam("name") String name,
+			@RequestParam("user_password") String pwd,
+			@RequestParam("remark1") String remark1,
+			@RequestParam("state") String state,
+			@RequestParam("remark2") String remark2,
+			@RequestParam("note") String note ){
 		logger.debug("-----C------- 增加用户   ---- usernum： " + usernum);
-		UserOrganization u = userService.saveUserBackId(usernum, name);
+		Integer  stateInt = Integer.parseInt(state);
+		UserOrganization u = userService.saveUserBackId(usernum, pwd,name,remark1,stateInt,remark2,note);
 		if( u != null ) {
 			logger.debug("-----C------- 增加用户成功   ----  " + u);
 			return new ResultJson<UserOrganization>( 0, "增加用户成功 ", u );
@@ -362,9 +346,10 @@ public class UserController {
 	public ResultJson<String> modifyUserById(
 			@RequestParam("orgid") @NotBlank String orgid,
 			@RequestParam("usernum") @NotBlank String usernum,
-			@RequestParam("name") @NotBlank String name){
+			@RequestParam("name") @NotBlank String name,
+			@RequestParam("user_password") @NotBlank String user_password){
 		logger.debug( "--C---------- 根据用户id修改用户信息  -----------" );
-		int i = userService.modifyUserByIdServ(orgid, usernum, name);
+		int i = userService.modifyUserByIdServ(orgid, usernum, name,user_password);
 		if( i > 0 ) {
 			logger.debug("-----C------- 根据用户id修改用户信息   成功  ----  " + i);
 			return new ResultJson<String>( 0, "修改成功 ", i + "" );
