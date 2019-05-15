@@ -18,4 +18,3 @@ public class IotStationApplication extends SpringBootServletInitializer{
 	        return builder.sources(IotStationApplication.class); 
 	 }
 }
-
