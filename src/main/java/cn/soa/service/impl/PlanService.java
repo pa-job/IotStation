@@ -36,9 +36,6 @@ public class PlanService {
 	private PositionRepository positionRepository;
 	
 	@Autowired
-	private CurrentValueRepository currValueRepository;
-	
-	@Autowired
 	private TotalValueRepository totalValueRepository;
 		
 	@Scheduled(cron="0 0 12 * * ?")
