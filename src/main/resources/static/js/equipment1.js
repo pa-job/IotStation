@@ -1,20 +1,21 @@
 $(function(){
 	
 	var surl1 = ipPort + "/positions/pname"
-	,surl2 = ipPort + "/positions/eqid"
+	,surl2 = ipPort + "/positions/enumber"
 	,smurl = ipPort + "/monitorData/current"
-	,ydata
-	,starder12,starder13
-	,starder22,starder23
-	,starder32,starder33
+	,ydata 
+	,starder12 = 15,starder13 = 25
+	,starder22 = 225,starder23 = 250
+	,starder32 = 75,starder33 = 85
 	,params = ['1-param-1','1-param-2','1-param-2'
 		,'2-param-1','2-param-2','2-param-2'
 		,'3-param-1','3-param-2','3-param-2'];
 
 	$.ajax({
    		type: "get",
-   		url: surl ,
-   		data: {"eqid":"1-1-1"},
+//   		url: surl2 ,
+   		url: '',
+   		data: {"enumber":"1-1-1"},
    		async:false,
    		contentType: "application/x-www-form-urlencoded",
    		dataType: "json",	       	     
@@ -44,7 +45,6 @@ $(function(){
    			console.log( starder13 );
    		},
    	    error:function(){
-   	    	layer.msg('请求失败：');
    	    }		       
 	});
 	
@@ -57,7 +57,7 @@ $(function(){
 	
 	var option1 = {
 		    title: {
-//		        text: '动态数据',
+		        text: '电流值实时监控',
 //		        subtext: '纯属虚构'
 		    },
 		    tooltip: {
@@ -70,7 +70,7 @@ $(function(){
 		        }
 		    },
 		    legend: {
-		        data:['上限值', '下限值', '预购队列']
+		        data:['上限值', '下限值', '实际瞬时值']
 		    },
 		    toolbox: {
 		        show: true,
@@ -133,7 +133,7 @@ $(function(){
 		    ],
 		    series: [
 		        {
-		            name:'预购队列',
+		            name:'实际瞬时值',
 		            type:'bar',
 		            xAxisIndex: 1,
 		            yAxisIndex: 1,
@@ -177,7 +177,7 @@ $(function(){
 
 	var option2 = {
 		    title: {
-//		        text: '动态数据',
+		        text: '电压值实时监控',
 //		        subtext: '纯属虚构'
 		    },
 		    tooltip: {
@@ -190,7 +190,7 @@ $(function(){
 		        }
 		    },
 		    legend: {
-		        data:['上限值', '下限值', '预购队列']
+		        data:['上限值', '下限值', '实际瞬时值']
 		    },
 		    toolbox: {
 		        show: true,
@@ -237,23 +237,23 @@ $(function(){
 		        {
 		            type: 'value',
 		            scale: true,
-		            name: '电流值',
-		            max: 30,
-		            min: 0,
+		            name: '电压值',
+		            max: 270,
+		            min: 210,
 		            boundaryGap: [0.2, 0.2]
 		        },
 		        {
 		            type: 'value',
 		            scale: true,
-		            name: '电流值',
-		            max: 30,
-		            min: 0,
+		            name: '电压值',
+		            max: 270,
+		            min: 210,
 		            boundaryGap: [0.2, 0.2]
 		        }
 		    ],
 		    series: [
 		        {
-		            name:'预购队列',
+		            name:'实际瞬时值',
 		            type:'bar',
 		            xAxisIndex: 1,
 		            yAxisIndex: 1,
@@ -295,9 +295,9 @@ $(function(){
 		    ]
 		};
 	
-	var option2 = {
+	var option3 = {
 		    title: {
-//		        text: '动态数据',
+		        text: '功率值实时监控',
 //		        subtext: '纯属虚构'
 		    },
 		    tooltip: {
@@ -310,7 +310,7 @@ $(function(){
 		        }
 		    },
 		    legend: {
-		        data:['上限值', '下限值', '预购队列']
+		        data:['上限值', '下限值', '实际瞬时值']
 		    },
 		    toolbox: {
 		        show: true,
@@ -357,23 +357,23 @@ $(function(){
 		        {
 		            type: 'value',
 		            scale: true,
-		            name: '电流值',
-		            max: 30,
-		            min: 0,
+		            name: '功率值',
+		            max: 115,
+		            min: 55,
 		            boundaryGap: [0.2, 0.2]
 		        },
 		        {
 		            type: 'value',
 		            scale: true,
-		            name: '电流值',
-		            max: 30,
-		            min: 0,
+		            name: '功率值',
+		            max: 115,
+		            min: 55,
 		            boundaryGap: [0.2, 0.2]
 		        }
 		    ],
 		    series: [
 		        {
-		            name:'预购队列',
+		            name:'实际瞬时值',
 		            type:'bar',
 		            xAxisIndex: 1,
 		            yAxisIndex: 1,
@@ -432,28 +432,49 @@ $(function(){
 		    var data32 = option3.series[1].data;
 		    var data33 = option3.series[2].data;
 		    
-		    ajax( 'get', smurl, {}, function( data ){
-		    	data11.shift();
-			    data11.push( data['1-param-1']);
-			    data12.shift();
-			    data12.push(starder12);
-			    data13.shift();
-			    data13.push(starder13);
-			    
-			    data21.shift();
-			    data21.push( data['1-param-2']);
-			    data22.shift();
-			    data22.push(starder22);
-			    data23.shift();
-			    data23.push(starder23);
-			    
-			    data31.shift();
-			    data31.push( data['1-param-3']);
-			    data32.shift();
-			    data32.push(data32);
-			    data33.shift();
-			    data33.push(data33);
-		    }, false  );
+		    data11.shift();
+		    data11.push(Math.round(Math.random() * 13) + 15 );
+		    data12.shift();
+		    data12.push(15);
+		    data13.shift();
+		    data13.push(25);
+		    
+		    data21.shift();
+		    data21.push(Math.round(Math.random() * 27) + 225);
+		    data22.shift();
+		    data22.push(225);
+		    data23.shift();
+		    data23.push(250);
+		    
+		    data31.shift();
+		    data31.push(Math.round(Math.random() * 13) + 75 );
+		    data32.shift();
+		    data32.push(75);
+		    data33.shift();
+		    data33.push(95);
+
+//		    ajax( 'get', '', {"params": params}, function( data ){
+//		    	data11.shift();
+//			    data11.push( data['1-param-1']);
+//			    data12.shift();
+//			    data12.push(starder12);
+//			    data13.shift();
+//			    data13.push(starder13);
+//			    
+//			    data21.shift();
+//			    data21.push( data['1-param-2']);
+//			    data22.shift();
+//			    data22.push(starder22);
+//			    data23.shift();
+//			    data23.push(starder23);
+//			    
+//			    data31.shift();
+//			    data31.push( data['1-param-3']);
+//			    data32.shift();
+//			    data32.push(data32);
+//			    data33.shift();
+//			    data33.push(data33);
+//		    }, false  );
 
 		    option1.xAxis[0].data.shift();
 		    option1.xAxis[0].data.push(axisData);

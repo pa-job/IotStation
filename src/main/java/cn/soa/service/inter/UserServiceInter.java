@@ -14,6 +14,8 @@ package cn.soa.service.inter;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Service;
+
 import cn.soa.entity.UserInfo;
 import cn.soa.entity.UserOrganization;
 
@@ -24,7 +26,7 @@ import cn.soa.entity.UserOrganization;
  	 * @author zhugang
  	 * @date 2019年1月12日
  	 */
-
+@Service
 public interface UserServiceInter {
 	/**   
 	  * @Title: getUserOrganById   

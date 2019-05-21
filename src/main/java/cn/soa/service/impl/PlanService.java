@@ -39,7 +39,7 @@ public class PlanService {
 	private TotalValueRepository totalValueRepository;
 		
 	@Scheduled(cron="0 0 12 * * ?")
-    private void configureTasks() {
+    public void configureTasks() {
 		try {
 			List<Position> positions = positionRepository.findAll();
 			ArrayList<String> positionStrs = new ArrayList<String>();

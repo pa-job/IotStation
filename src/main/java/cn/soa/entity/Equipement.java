@@ -26,6 +26,7 @@ public class Equipement implements Serializable{
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY )	
 	private Long eqid ;
+	private String enumber ;
 	private String ename ;
 	private String etype ;
 	private String note ;

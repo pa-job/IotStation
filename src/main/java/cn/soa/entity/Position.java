@@ -25,7 +25,7 @@ public class Position  implements Serializable{
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY )	
 	private Long poid;
-	private String eqid;
+	private String enumber;
 	private String pname;
 	private String pvalue;
 	private String punit;

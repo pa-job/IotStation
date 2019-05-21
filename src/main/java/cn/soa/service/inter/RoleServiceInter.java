@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Service;
 
 import cn.soa.entity.AuthInfo;
 import cn.soa.entity.UserOrganization;
@@ -28,7 +29,7 @@ import cn.soa.entity.UserRoleRelation;
   * @author zhugang
   * @date 2019年1月24日
   */
-
+@Service
 public interface RoleServiceInter {
 
 	 /**   

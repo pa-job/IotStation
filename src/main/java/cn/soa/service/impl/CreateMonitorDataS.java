@@ -7,10 +7,11 @@ import java.util.Random;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import cn.soa.controller.MonitorDataCreater;
 import cn.soa.service.inter.CreateMonitorDataSI;
-
+@Service
 public class CreateMonitorDataS implements CreateMonitorDataSI{
 	private static Logger logger = LoggerFactory.getLogger( CreateMonitorDataS.class );
 	

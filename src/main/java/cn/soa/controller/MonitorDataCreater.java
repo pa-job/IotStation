@@ -1,5 +1,6 @@
 package cn.soa.controller;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,9 +33,9 @@ public class MonitorDataCreater {
 	
 	@GetMapping("/current")
 	public ResultJson<Map<String,Object>> getCurrentData(
-			@RequestParam List<String> params ){
+			 @RequestParam("params[]") String[]  params ){
 		logger.debug( params.toString() );
-		Map<String, Object> values = createMonitorDataS.createMonitorData(params);
+		Map<String, Object> values = createMonitorDataS.createMonitorData(Arrays.asList(params));
 		return new ResultJson<Map<String,Object>>( 0, "获取实时数据成功", values );
 	}
 	
